@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage d'internet dans le monde</title>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <div class="form-group">
+                <label for="formControlRange">Selectionnez l'année</label>
+                <input type="range" class="form-control-range" id="formControlRange"
+                    :min="lowestYear" :max="highestYear">
+            </div>
+        </form>
+
+        <select>
+            <option v-for="country in uniqueCountry" :key="country.country"
+                :value="country.country">{{country.country}}</option>
+        </select>
+
+        <table id="">
+            <thead>
+                <td>Année</td>
+                <td>Pays</td>
+                <td>Pourcentage</td>
+            </thead>
+            <tbody>
+                <tr v-for="data in datas" :key="key(data)">
+                    <td>{{ data.year }}</td>
+                    <td>{{ data.country }}</td>
+                    <td>{{ roundFloat(data.percent) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+    <script src='/js/vue.js'></script>
+    <script src='/js/vue-resource.min.js'></script>
+    <script src='/js/main.js'></script>
+</body>
+
+</html>

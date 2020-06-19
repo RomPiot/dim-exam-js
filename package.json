@@ -1,0 +1,17 @@
+{
+  "name": "exam_js_romain_piot",
+  "version": "1.0.0",
+  "description": "Evaluation to JS",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Romain PIOT",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.5.8",
+    "vue": "^2.6.11",
+    "vue-resource": "^1.5.1"
+  }
+}
