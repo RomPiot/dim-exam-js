@@ -1,61 +1,62 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-reboot.min.css"
-        type="text/css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-grid.min.css"
-        type="text/css">
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="node_modules/chart.js/dist/Chart.min.css" type="text/css">
-    <link rel="stylesheet" href="./css/style.min.css" type="text/css">
-    <title>Internet à travers le monde</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-reboot.min.css" type="text/css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-grid.min.css" type="text/css">
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="node_modules/chart.js/dist/Chart.min.css" type="text/css">
+		<link rel="stylesheet" href="./css/style.min.css" type="text/css">
+		<title>Internet à travers le monde</title>
+	</head>
 
-<body>
-    <div id="app" class="d-flex">
-        <div class="d-flex flex-column col-3">
-            <div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">Pays</span>
-                    </div>
-                    <input type="text" class="form-control filter-country"
-                        placeholder="Nom du Pays (en anglais)" :onkeyup="filterCountry()">
-                </div>
-            </div>
-            <div class="sidebar">
-                <div class="container">
-                    <div class="d-flex flex-column flex-wrap justify-content-center">
-                        <div class="" v-for="country in uniqueCountry" :key="country.code">
-                            <a href="#myChart" class="country" :value="country.country"
-                                v-on:click="myChart(country.country)">{{country.country}}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-9 chart-container">
-            <h1>Internet à travers le monde (1990 - 2017)</h1>
-            <img class="loader" src="./images/loader.gif" class="" alt="">
-            <canvas id="myChart" width="400" height="200"></canvas>
-        </div>
+	<body>
+		<div id="app" class="d-flex">
 
-    </div>
-    <footer>
-        <a href="https://romainpiot.fr" target="_blank">--> Voir ici le Super Portfolio JS de Romain PIOT <--</a>
-    </footer>
+			<div class="d-flex flex-column col-3">
 
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
-    <script src='/js/vue.js'></script>
-    <script src='/js/vue-resource.min.js'></script>
-    <script src='node_modules/jquery/dist/jquery.min.js'></script>
-    <script src='node_modules/chart.js/dist/Chart.min.js'></script>
-    <script src='/js/main.min.js'></script>
+				<div>
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon1">Pays</span>
+						</div>
+						<input type="text" class="form-control filter-country" placeholder="Nom du Pays (en anglais)" :onkeyup="filterCountry()">
+					</div>
+				</div>
 
-</body>
+				<div class="sidebar">
+					<div class="container">
+						<div class="d-flex flex-column flex-wrap justify-content-center">
+							<div class="" v-for="country in uniqueCountry" :key="country.country">
+								<a href="#myChart" class="country" :value="country.country" v-on:click="myChart(country.country)">{{country.country}}
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 
+			</div>
+
+			<div class="col-9 chart-container">
+				<h1>Internet à travers le monde (1990 - 2017)</h1>
+				<img class="loader" src="./images/loader.gif" class="" alt="">
+				<canvas id="myChart" width="400" height="200"></canvas>
+			</div>
+            
+		</div>
+
+		<footer>
+			<a href="https://romainpiot.fr" target="_blank">--> Voir ici le Super Portfolio JS de Romain PIOT <--</a>
+		</footer>
+
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js'></script>
+		<script src='/js/vue.js'></script>
+		<script src='/js/vue-resource.min.js'></script>
+		<script src='./node_modules/jquery/dist/jquery.min.js'></script>
+		<script src='./node_modules/chart.js/dist/Chart.min.js'></script>
+		<script src='/js/main.js'></script>
+
+	</body>
 </html>
