@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 $bgcolor: #3e4549;
-$color: rgb(207, 207, 207);
+$color: #cfcfcf;
 
 body {
     padding-top: 30px;
@@ -18,27 +18,32 @@ a {
     }
 }
 
+.sidebar {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
 .country {
-    padding: 25px;
+    padding: 15px;
     display: flex;
     border: 1px solid $color;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin: 10px;
-    border-radius: 15px;
+    border-radius: 5px;
     cursor: pointer;
     transition: 0.2s;
     color: $color;
 
     &:hover {
-        background-color: $color;
-        color: $bgcolor;
+        background-color: rgb(44, 146, 204);
+        color: $color;
     }
 }
 
 footer {
-    height: 100px;
+    height: 60px;
     background-color: #475f7d;
     text-align: center;
     display: flex;
@@ -58,3 +63,19 @@ footer {
 .bg {
     background-color: blue;
 } 
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+    
+    img {
+        width: 200px;
+    }
+}

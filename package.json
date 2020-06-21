@@ -11,9 +11,7 @@
   "dependencies": {
     "bootstrap": "^4.5.0",
     "chart.js": "^2.9.3",
-    "express": "^4.17.1",
     "jquery": "^3.5.1",
-    "mongodb": "^3.5.8",
     "vue": "^2.6.11",
     "vue-resource": "^1.5.1"
   }

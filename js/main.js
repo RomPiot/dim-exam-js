@@ -1,5 +1,4 @@
 const jsonData = "../data/share-of-individuals-using-the-internet.json";
-var json;
 
 var app = new Vue({
   el: "#app",
@@ -33,7 +32,7 @@ var app = new Vue({
       var canvas = document.getElementById("myChart");
 
       canvas.remove();
-      $("#app").append(
+      $(".chart-container").append(
         '<canvas id="myChart" width="400" height="200"></canvas>'
       );
 
@@ -43,9 +42,7 @@ var app = new Vue({
 
       app.dataCountries.forEach((element) => {
         if (element.name === country) {
-          console.log(element);
-
-          Chart.defaults.global.defaultFontColor = '#cfcfcf';
+          Chart.defaults.global.defaultFontColor = "#cfcfcf";
 
           var myChart = new Chart(ctx, {
             type: "line",
@@ -119,12 +116,6 @@ var app = new Vue({
     });
 
     setTimeout(() => {
-      this.datas.forEach((element) => {
-        // console.log(element);
-      });
-    }, 500);
-
-    setTimeout(() => {
       this.datas.reduce((seed, current) => {
         if (this.years.indexOf(current.year) == -1) {
           app.years.push(current.year);
@@ -150,8 +141,6 @@ var app = new Vue({
 
     setTimeout(() => {
       this.datas.forEach((element) => {
-        console.log(element);
-
         if (element.country != lastCountry) {
           if (typeof newCountry != "undefined") {
             newCountry.percents.push(100);
@@ -178,7 +167,37 @@ var app = new Vue({
       newCountry.percents.push(100);
 
       app.dataCountries.push(newCountry);
-      console.log(app.dataCountries);
+
+      $(".loader").remove();
+      Chart.defaults.global.defaultFontColor = "#cfcfcf";
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: [1990, 2017],
+          datasets: [
+            {
+              label: "Selectionnez un pays",
+              data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+              backgroundColor: [],
+              borderColor: [],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
     }, 2000);
   },
 });
