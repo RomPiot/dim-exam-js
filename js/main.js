@@ -6,7 +6,7 @@ var app = new Vue({
   data: {
     datas: [],
     years: [],
-    dataCountry: [],
+    dataCountries: [],
   },
   methods: {
     activate: function () {},
@@ -29,75 +29,57 @@ var app = new Vue({
         });
       });
     },
-    myChart: function () {
-      var ctx = document.getElementById("myChart").getContext("2d");
-      var allYears = this.years;
+    myChart: function (country) {
+      var canvas = document.getElementById("myChart");
 
-      var fullCountries = [];
-      var newCountry;
-      var lastCountry = "";
-      var n = 0;
+      canvas.remove();
+      $("#app").append(
+        '<canvas id="myChart" width="400" height="200"></canvas>'
+      );
 
-      
-      function random_rgba() {
-          var o = Math.round, r = Math.random, s = 255;
-          return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ', 0.2)';
-      }
+      var canvas = document.getElementById("myChart");
+      var ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      setTimeout(() => {
-        this.datas.forEach((element) => {
-          if (n < 5) {
-            if (element.country != lastCountry) {
-              n++;
+      app.dataCountries.forEach((element) => {
+        if (element.name === country) {
+          console.log(element);
 
-              if (typeof newCountry != "undefined") {
-                fullCountries.push(newCountry);
-              }
+          Chart.defaults.global.defaultFontColor = '#cfcfcf';
 
-              newCountry = {
-                label: element.country,
-                data: [element.percent],
-                backgroundColor: [
-                  random_rgba()
-                ],
-                borderColor: [
-                  random_rgba()
-                ],
-                borderWidth: 1,
-              };
-            } else {
-              newCountry.data.push(element.percent);
-            }
-          }
-
-          lastCountry = element.country;
-        });
-
-        fullCountries.push(newCountry);
-      }, 2000);
-
-      setTimeout(() => {
-        console.log(fullCountries);
-
-        var myChart = new Chart(ctx, {
-          type: "line",
-          data: {
-            labels: allYears,
-            datasets: fullCountries,
-          },
-          options: {
-            scales: {
-              yAxes: [
+          var myChart = new Chart(ctx, {
+            type: "line",
+            data: {
+              labels: element.years,
+              datasets: [
                 {
-                  ticks: {
-                    beginAtZero: true,
-                  },
+                  label: element.name,
+                  data: element.percents,
+                  backgroundColor: element.backgroundColor,
+                  borderColor: element.borderColor,
+                  borderWidth: 1,
                 },
               ],
             },
-          },
-        });
-      }, 2000);
+            options: {
+              legend: {
+                labels: {
+                  fontColor: "white",
+                },
+              },
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      beginAtZero: true,
+                    },
+                  },
+                ],
+              },
+            },
+          });
+        }
+      });
     },
   },
   computed: {
@@ -153,5 +135,50 @@ var app = new Vue({
         this.years.sort();
       }, 1000);
     }, 1000);
+
+    var newCountry;
+    var lastCountry = "";
+
+    function random_rgba() {
+      var o = Math.round,
+        r = Math.random,
+        s = 255;
+      return (
+        "rgba(" + o(r() * s) + "," + o(r() * s) + "," + o(r() * s) + ", 0.4)"
+      );
+    }
+
+    setTimeout(() => {
+      this.datas.forEach((element) => {
+        console.log(element);
+
+        if (element.country != lastCountry) {
+          if (typeof newCountry != "undefined") {
+            newCountry.percents.push(100);
+
+            app.dataCountries.push(newCountry);
+          }
+
+          newCountry = {
+            name: element.country,
+            years: [element.year],
+            percents: [element.percent],
+            backgroundColor: [random_rgba()],
+            borderColor: [random_rgba()],
+            borderWidth: 1,
+          };
+        } else {
+          newCountry.years.push(element.year);
+          newCountry.percents.push(element.percent);
+        }
+
+        lastCountry = element.country;
+      });
+
+      newCountry.percents.push(100);
+
+      app.dataCountries.push(newCountry);
+      console.log(app.dataCountries);
+    }, 2000);
   },
 });
